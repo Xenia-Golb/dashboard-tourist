@@ -25,18 +25,7 @@ React-приложение с использованием **TypeScript**, **Red
 
 ## 🧮 Формула расчёта CAGR
 
-<div style="text-align: center; font-size: 1.2em; margin: 1em 0;">
-  <strong>CAGR =</strong> 
-  <div style="display: inline-block; vertical-align: middle;">
-    <div style="border-bottom: 1px solid; padding: 0 0.5em;">
-      Туристов в текущем году
-    </div>
-    <div style="padding: 0.3em 0.5em 0;">
-      Туристов в предыдущем году
-    </div>
-  </div>
-  <strong>× 100% − 100%</strong>
-</div>
+CAGR = (Туристов в текущем году / Туристов в предыдущем году) × 100% − 100%
 
 ---
 
@@ -58,7 +47,7 @@ React-приложение с использованием **TypeScript**, **Red
 1. **Клонируйте репозиторий**:
 
 ```bash
-  git clone https://github.com/Xenia-Golb/dashboardTourist.git
+  git clone https://github.com/Xenia-Golb/dashboard-tourist.git
   cd dashboardTourist
 ```
 

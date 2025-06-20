@@ -63,7 +63,7 @@ export function ChartComponent() {
       ]
     : [selectedCategory];
 
-  const COLORS = ["#4A90E2", "#F5A623", "#2caa32"];
+  const COLORS = ["#52b9d8", "#8e7cc3", "#ea9999"];
   const totalTourists = getTotalTourists(
     mockData as TouristData[],
     selectedCategory !== "Все туристы" ? selectedCategory : undefined,
@@ -71,8 +71,13 @@ export function ChartComponent() {
   );
 
   return (
-    <div style={{ width: "70vw", height: 500 }}>
-      <Box sx={{ textAlign: "center", marginBottom: 2 }}>
+    <div style={{ width: "50vw", height: "50vh" }}>
+      <Box
+        sx={{
+          textAlign: "center",
+          marginBottom: 2,
+        }}
+      >
         <Typography variant="h5" component="div" gutterBottom>
           Итого: <strong>{totalTourists.toLocaleString()}</strong>
           <br />
@@ -85,27 +90,36 @@ export function ChartComponent() {
       <ResponsiveContainer>
         <ComposedChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="year" />
+          <XAxis dataKey="year" stroke="white" />
           <YAxis
             yAxisId="left"
             orientation="left"
+            stroke="white"
             label={{
               value: "Млн прибытий",
               angle: -90,
               position: "insideLeft",
+              fill: "#ffffff",
             }}
           />
           <YAxis
             yAxisId="right"
+            stroke="white"
             orientation="right"
-            label={{ value: "CAGR (%)", angle: 90, position: "insideRight" }}
+            label={{
+              value: "Темп прироста (%)",
+              angle: 90,
+              position: "insideRight",
+              fill: "#ffffff",
+            }}
           />
           {categoriesToShow.map((cat, index) => (
             <Bar
               key={cat}
               name={cat}
               dataKey={cat}
-              barSize={20}
+              stackId="a"
+              barSize={70}
               fill={COLORS[index % COLORS.length]}
               yAxisId="left"
               onClick={(data) => {
@@ -119,15 +133,15 @@ export function ChartComponent() {
             name="CAGR (%)"
             type="monotone"
             dataKey="CAGR"
-            stroke="#ff0000"
+            stroke="#ffd966"
             strokeWidth={2}
             dot={{ r: 4 }}
             activeDot={{ r: 6 }}
             yAxisId="right"
             unit="%"
+            style={{ color: "yellow" }}
           />
-
-          <Tooltip />
+          <Tooltip contentStyle={{ color: "#fff", backgroundColor: "#333" }} />
           <Legend />
         </ComposedChart>
       </ResponsiveContainer>

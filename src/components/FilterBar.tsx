@@ -46,6 +46,11 @@ export function FilterBar() {
             onChange={handleCategoryChange}
             displayEmpty
             inputProps={{ "aria-label": "Без метки" }}
+            sx={{
+              color: "#52b9d8",
+              borderColor: "#0b5394",
+              backgroundColor: "#0b5394",
+            }}
           >
             {categories.map((cat) => (
               <MenuItem key={cat} value={cat}>
@@ -57,9 +62,12 @@ export function FilterBar() {
       )}
 
       <Button
-        variant={showChildren ? "contained" : "outlined"}
-        color="primary"
+        variant={showChildren ? "text" : "outlined"}
         onClick={handleToggleChildren}
+        sx={{
+          color: showChildren ? "#fff" : "#fff",
+          backgroundColor: showChildren ? "#1976d2" : "#0b5394",
+        }}
       >
         {showChildren ? "Дети" : "Дети"}
       </Button>

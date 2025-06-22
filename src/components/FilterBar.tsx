@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 import { type TouristCategory } from "../types";
-import { type RootState } from "../store";
+import { selectChartFilters } from "../store/selectrors";
 
 const categories: TouristCategory[] = [
   "Все туристы",
@@ -22,9 +22,7 @@ const categories: TouristCategory[] = [
 
 export function FilterBar() {
   const dispatch = useDispatch();
-  const { selectedCategory, showChildren } = useSelector(
-    (state: RootState) => state.chart
-  );
+  const { selectedCategory, showChildren } = useSelector(selectChartFilters);
 
   const handleCategoryChange = (e: SelectChangeEvent<TouristCategory>) => {
     const value = e.target.value;

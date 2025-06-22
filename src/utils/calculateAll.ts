@@ -6,8 +6,8 @@ export function getTotalTourists(
   onlyChildren: boolean = false
 ): number {
   return data.reduce((total, item) => {
-    if (category && item.категория_туриста !== category) return total;
-    if (onlyChildren && item.дети !== "да") return total;
+    if (category && item.category_tourist !== category) return total;
+    if (onlyChildren && item.children !== "да") return total;
     return total + item.count_turist;
   }, 0);
 }

@@ -1,49 +1,45 @@
 import { type TouristData, type GroupedData } from "../types";
 
 export function groupDataByYear(data: TouristData[]): GroupedData[] {
-  const groupedMap: Record<number, Record<string, number>> = {};
+  const result: GroupedData[] = [];
 
   data.forEach((item) => {
-    const year = item.год;
-    const category = item.категория_туриста;
+    const year = item.year;
+    const category = item.category_tourist;
     const tourists = item.count_turist;
 
-    if (!groupedMap[year]) {
-      groupedMap[year] = {
+    let entry = result.find((el) => el.year === year);
+
+    if (!entry) {
+      entry = {
+        year,
         "Граждане РФ": 0,
         "Граждане стран ближнего зарубежья": 0,
         "Граждане стран дальнего зарубежья": 0,
         Дети: 0,
       };
+      result.push(entry);
     }
 
-    if (item.дети === "да") {
-      groupedMap[year]["Дети"] += tourists;
+    if (item.children === "да") {
+      entry.children += tourists;
     }
 
-    groupedMap[year][category] += tourists;
+    entry[category] += tourists;
   });
 
-  return Object.keys(groupedMap).map((yearStr) => {
-    const year = parseInt(yearStr);
-    const values = groupedMap[year];
-
-    return {
-      year,
-      ...values,
-    };
-  });
+  return result;
 }
 export function getTotalTouristsForYear(
   data: GroupedData,
   category?: string
 ): number {
   if (category) {
-    return (data[category] as number) || 0;
+    return data[category] || 0;
   }
   return (
-    ((data["Граждане РФ"] as number) || 0) +
-    ((data["Граждане стран ближнего зарубежья"] as number) || 0) +
-    ((data["Граждане стран дальнего зарубежья"] as number) || 0)
+    data["Граждане РФ"] +
+    data["Граждане стран ближнего зарубежья"] +
+    data["Граждане стран дальнего зарубежья"]
   );
 }

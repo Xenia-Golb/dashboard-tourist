@@ -13,17 +13,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import mockData from "../data/mockdata";
 import { groupDataByYear, calculateCAGR, getTotalTourists } from "../utils";
-import { type TouristData, type ChartState } from "../types";
+import { type TouristData } from "../types";
 import { Box, Typography } from "@mui/material";
 import { setHighlightedYear } from "../store/chartSlice";
+import { selectChartFilters } from "../store/selectrors";
 
 const groupedData = groupDataByYear(mockData as TouristData[]);
 
 export function ChartComponent() {
   const dispatch = useDispatch();
-  const { selectedCategory, showChildren } = useSelector(
-    (state: { chart: ChartState }) => state.chart
-  );
+  const { selectedCategory, showChildren } = useSelector(selectChartFilters);
 
   const filtered = groupedData.map((item) => {
     if (showChildren) {
@@ -65,7 +64,7 @@ export function ChartComponent() {
 
   const COLORS = ["#52b9d8", "#8e7cc3", "#ea9999"];
   const totalTourists = getTotalTourists(
-    mockData as TouristData[],
+    mockData,
     selectedCategory !== "Все туристы" ? selectedCategory : undefined,
     showChildren
   );

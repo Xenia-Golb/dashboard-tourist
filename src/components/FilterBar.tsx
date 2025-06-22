@@ -26,8 +26,8 @@ export function FilterBar() {
     (state: RootState) => state.chart
   );
 
-  const handleCategoryChange = (e: SelectChangeEvent<string>) => {
-    const value = e.target.value as TouristCategory;
+  const handleCategoryChange = (e: SelectChangeEvent<TouristCategory>) => {
+    const value = e.target.value;
     dispatch(setCategory(value));
   };
 
